@@ -1,0 +1,29 @@
+version: "3.7"
+
+networks:
+  sci-teste:
+
+services:
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    networks:
+      sci-teste:
+    ports:
+      - "80:80"
+    volumes:
+      - "./nginx/:/etc/nginx/conf.d/"
+      - "./www/html/:/var/www/html/"
+  
+  php:
+    build: ./www/html
+    container_name: php
+    networks:
+      sci-teste:
+    ports:
+      - "9000:9000"
+    volumes:
+      - "./www/html:/var/www/html"
+    
+
+  
